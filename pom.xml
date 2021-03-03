@@ -32,6 +32,7 @@
         <maven.compiler.target>13</maven.compiler.target>
         <swagger-codegen-maven-plugin.version>2.4.18</swagger-codegen-maven-plugin.version>
         <springdoc-openapi-ui.version>1.5.2</springdoc-openapi-ui.version>
+        <junit-jupiter.version>5.7.1</junit-jupiter.version>
     </properties>
 
     <dependencyManagement>
@@ -47,12 +48,25 @@
                 <artifactId>springdoc-openapi-ui</artifactId>
                 <version>${springdoc-openapi-ui.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit-jupiter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit-jupiter.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
     <build>
         <pluginManagement>
             <plugins>
-            <!-- Open API -->
+                <!-- Open API -->
                 <plugin>
                     <groupId>io.swagger</groupId>
                     <artifactId>swagger-codegen-maven-plugin</artifactId>
@@ -73,7 +87,8 @@
                                 <output>${project.build.directory}/generated-sources</output>
                                 <apiPackage>${project.groupId}.${project.artifactId}.openapi.handler</apiPackage>
                                 <modelPackage>${project.groupId}.${project.artifactId}.openapi.model</modelPackage>
-                                <invokerPackage>${project.groupId}.${project.artifactId}.openapi.invoker</invokerPackage>
+                                <invokerPackage>${project.groupId}.${project.artifactId}.openapi.invoker
+                                </invokerPackage>
                             </configuration>
                         </execution>
                     </executions>
