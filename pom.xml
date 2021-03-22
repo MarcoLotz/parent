@@ -10,7 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.marcolotz</groupId>
   <artifactId>marcolotz-parent</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <packaging>pom</packaging>
   <name>Parent pom</name>
   <description>The pom file used as parent for many side projects</description>
@@ -25,7 +25,7 @@
   </licenses>
 
   <properties>
-    <checkstyle-config.version>1.0.1</checkstyle-config.version>
+    <checkstyle-config.version>1.0.2</checkstyle-config.version>
     <checkstyle-maven-plugin.version>3.1.2</checkstyle-maven-plugin.version>
     <checkstyle.version>8.41</checkstyle.version>
     <junit-jupiter.version>5.7.1</junit-jupiter.version>
