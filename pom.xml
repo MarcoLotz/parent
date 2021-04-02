@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.marcolotz</groupId>
     <artifactId>marcolotz-parent</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.7-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Parent pom</name>
     <description>The pom file used as parent for many side projects</description>
@@ -31,22 +31,48 @@
         <junit-jupiter.version>5.7.1</junit-jupiter.version>
         <maven.compiler.source>13</maven.compiler.source>
         <maven.compiler.target>13</maven.compiler.target>
+        <openapi-generator.version>5.1.0</openapi-generator.version>
         <springdoc-openapi-ui.version>1.5.2</springdoc-openapi-ui.version>
-        <swagger-codegen-maven-plugin.version>2.4.18</swagger-codegen-maven-plugin.version>
+        <validation-api.version>2.0.1.Final</validation-api.version>
+        <jackson-databin-nullable.version>0.2.1</jackson-databin-nullable.version>
+        <swagger-annotations.version>1.6.2</swagger-annotations.version>
+        <spring-fox.version>2.9.2</spring-fox.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- OpenApi 3.0 -->
             <dependency>
-                <groupId>io.swagger.codegen.v3</groupId>
-                <artifactId>swagger-codegen-maven-plugin</artifactId>
-                <version>${swagger-codegen-maven-plugin.version}</version>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger-annotations.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openapitools</groupId>
+                <artifactId>jackson-databind-nullable</artifactId>
+                <version>${jackson-databin-nullable.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${spring-fox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${spring-fox.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-ui</artifactId>
                 <version>${springdoc-openapi-ui.version}</version>
             </dependency>
+            <!-- JUnit 5 dependencies -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
@@ -61,21 +87,28 @@
     </dependencyManagement>
 
     <build>
+        <resources>
+            <!-- Add generated sources to build -->
+            <resource>
+                <directory>${project.build.directory}/generated-resources</directory>
+            </resource>
+        </resources>
         <pluginManagement>
             <plugins>
                 <!-- Open API -->
                 <plugin>
-                    <groupId>io.swagger</groupId>
-                    <artifactId>swagger-codegen-maven-plugin</artifactId>
-                    <version>${swagger-codegen-maven-plugin.version}</version>
+                    <groupId>org.openapitools</groupId>
+                    <artifactId>openapi-generator-maven-plugin</artifactId>
+                    <version>${openapi-generator.version}</version>
                     <executions>
                         <execution>
                             <goals>
                                 <goal>generate</goal>
                             </goals>
                             <configuration>
+                                <!-- reference: https://openapi-generator.tech/docs/generators/spring -->
                                 <inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
-                                <language>spring</language>
+                                <generatorName>spring</generatorName>
                                 <configOptions>
                                     <sourceFolder>src/gen/java/main</sourceFolder>
                                     <dateLibrary>java8</dateLibrary>
@@ -84,8 +117,7 @@
                                 <output>${project.build.directory}/generated-sources</output>
                                 <apiPackage>${project.groupId}.${project.artifactId}.openapi.handler</apiPackage>
                                 <modelPackage>${project.groupId}.${project.artifactId}.openapi.model</modelPackage>
-                                <invokerPackage>${project.groupId}.${project.artifactId}.openapi.invoker
-                                </invokerPackage>
+                                <invokerPackage>${project.groupId}.${project.artifactId}.openapi.invoker</invokerPackage>
                             </configuration>
                         </execution>
                     </executions>
