@@ -28,15 +28,15 @@
         <checkstyle-config.version>1.0.4</checkstyle-config.version>
         <checkstyle-maven-plugin.version>3.1.2</checkstyle-maven-plugin.version>
         <checkstyle.version>8.41</checkstyle.version>
+        <jackson-databin-nullable.version>0.2.1</jackson-databin-nullable.version>
         <junit-jupiter.version>5.7.1</junit-jupiter.version>
         <maven.compiler.source>13</maven.compiler.source>
         <maven.compiler.target>13</maven.compiler.target>
         <openapi-generator.version>5.1.0</openapi-generator.version>
-        <springdoc-openapi-ui.version>1.5.2</springdoc-openapi-ui.version>
-        <validation-api.version>2.0.1.Final</validation-api.version>
-        <jackson-databin-nullable.version>0.2.1</jackson-databin-nullable.version>
-        <swagger-annotations.version>1.6.2</swagger-annotations.version>
         <spring-fox.version>2.9.2</spring-fox.version>
+        <springdoc-openapi-ui.version>1.5.2</springdoc-openapi-ui.version>
+        <swagger-annotations.version>1.6.2</swagger-annotations.version>
+        <validation-api.version>2.0.1.Final</validation-api.version>
     </properties>
 
     <dependencyManagement>
@@ -118,7 +118,8 @@
                                 <output>${project.build.directory}/generated-sources</output>
                                 <apiPackage>${project.groupId}.${project.artifactId}.openapi.handler</apiPackage>
                                 <modelPackage>${project.groupId}.${project.artifactId}.openapi.model</modelPackage>
-                                <invokerPackage>${project.groupId}.${project.artifactId}.openapi.invoker</invokerPackage>
+                                <invokerPackage>${project.groupId}.${project.artifactId}.openapi.invoker
+                                </invokerPackage>
                             </configuration>
                         </execution>
                     </executions>
@@ -148,7 +149,6 @@
                     <!-- Should not perform checkstyle on target or auto-generated code: https://bit.ly/3um9gBf -->
                     <sourceDirectories>
                         <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
-                        <sourceDirectory>${project.build.testSourceDirectory}</sourceDirectory>
                     </sourceDirectories>
                 </configuration>
                 <executions>
