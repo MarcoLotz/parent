@@ -37,10 +37,16 @@
         <springdoc-openapi-ui.version>1.5.2</springdoc-openapi-ui.version>
         <swagger-annotations.version>1.6.2</swagger-annotations.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
+        <map-struct.version>1.4.2.Final</map-struct.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${map-struct.version}</version>
+            </dependency>
             <!-- OpenApi 3.0 -->
             <dependency>
                 <groupId>io.swagger</groupId>
@@ -95,6 +101,23 @@
         </resources>
         <pluginManagement>
             <plugins>
+                <!-- Map Struct -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${map-struct.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
                 <!-- Open API -->
                 <plugin>
                     <groupId>org.openapitools</groupId>
