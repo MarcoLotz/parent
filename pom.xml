@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.marcolotz</groupId>
     <artifactId>marcolotz-parent</artifactId>
-    <version>1.0.9</version>
+    <version>1.0.10-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Parent pom</name>
     <description>The pom file used as parent for many side projects</description>
@@ -97,6 +97,11 @@
             <!-- Add generated sources to build -->
             <resource>
                 <directory>${project.build.directory}/generated-resources</directory>
+            </resource>
+            <!-- Add main resources directory to build -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>${project.build.directory}/dist/resources</targetPath>
             </resource>
         </resources>
         <pluginManagement>
