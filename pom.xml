@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.0</version>
+        <version>2.4.5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.marcolotz</groupId>
     <artifactId>marcolotz-parent</artifactId>
-    <version>1.0.10</version>
+    <version>1.0.11-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Parent pom</name>
     <description>The pom file used as parent for many side projects</description>
@@ -101,8 +101,12 @@
             <!-- Add main resources directory to build -->
             <resource>
                 <directory>src/main/resources</directory>
-                <targetPath>${project.build.directory}/dist/resources</targetPath>
-            </resource>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.jks</include>
+                </includes>
+                </resource>
         </resources>
         <pluginManagement>
             <plugins>
@@ -223,11 +227,6 @@
                         --illegal-access=permit
                     </argLine>
                 </configuration>
-            </plugin>
-            <!-- https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/htmlsingle/ -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
